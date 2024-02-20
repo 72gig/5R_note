@@ -1,6 +1,7 @@
 import sqlite3
 import os
 import re
+import json
 
 from flask import request,jsonify
 
@@ -18,20 +19,20 @@ def create_new_sql_database():
                 draft text,  \
                 keyWord text,  \
                 summary text,  \
-                other text)" )
+                other text);" )
     con.close()
     return {"message": ["createSuccess", "create db name is ", dbName]}
 
 def create_new_sql_page():
     # 用GET方式傳回資料, 需要得到資料庫名稱跟新增行的名稱
-    lineValue = request.args.get("inputPageValue")
-    databasefile = request.args.get("databaseName")
+    lineValue = str(request.args.get("inputPageValue"))
+    databasefile = str(request.args.get("databaseName"))
     con = sqlite3.connect(databasefile)  # 在js那邊已經設定後方有 .db
     # 需要把後面的 .db 取下
     fileName = re.search(r'(\w+)\.db', databasefile).group(1)
     cur = con.cursor()
     # 建立一行sql資料
-    cur.execute(f"insert into {fileName} (title) values ('{lineValue}')")
+    cur.execute(f"insert into {fileName} (title) values (\"{lineValue}\");")
     con.commit()
     con.close()
     return {"message": ["createSuccessPage",
@@ -50,7 +51,36 @@ def get_exist_sql_data():
         print('File Name:', filename)
     else:
         return {"message": ["can not use this"]}
-    return {"message": ["uploadSuccess", "filename is", filename]}
+    # 我需要把已有的庫料庫頁面回傳回去
+    unFileExtension = re.search(r'(\w+)\.db', filename).group(1)
+    con = sqlite3.connect(filename)
+    cur = con.cursor()
+    cur.execute(f"select id, title from {unFileExtension};")
+    results = cur.fetchall()
+    con.close()
+    # 為了傳回資料需要把結果改為json的格式
+    jsonResults = []
+    for i in results:
+        jsonDict = {"id": i[0], "title": i[1]}
+        jsonResults.append(jsonDict)
+
+    return {"message": ["uploadSuccess", "filename is", filename,
+                        "pageName is", jsonResults]}
 
 def save_page():
     return True
+
+def delete_exist_sql_pageline():
+    lineValue = str(request.args.get("inputPageValue"))
+    databasefile = str(request.args.get("databaseName"))
+    unFileExtension = re.search(r'(\w+)\.db', databasefile).group(1)
+    con = sqlite3.connect(databasefile)
+    cur = con.cursor()
+    print(databasefile)
+    print(unFileExtension)
+    print(lineValue)
+    cur.execute(f"delete from {unFileExtension} where title = \"{lineValue}\";")
+    con.commit()
+    con.close()
+
+    return {"message": ["delectSuccess", "CheckNextOne"]}
