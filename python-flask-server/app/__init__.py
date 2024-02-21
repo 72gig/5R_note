@@ -1,5 +1,6 @@
 from flask import Flask
-from app.router import create_new_sql_database, create_new_sql_page, get_exist_sql_data, save_page, delete_exist_sql_pageline
+from app.router import create_new_sql_database, create_new_sql_page, get_exist_sql_data,  \
+                save_page, delete_exist_sql_pageline
 
 
 
