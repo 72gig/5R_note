@@ -32,6 +32,8 @@ def create_new_sql_page():
     fileName = re.search(r'(\w+)\.db', databasefile).group(1)
     cur = con.cursor()
     # 建立一行sql資料
+    print(fileName)
+    print(lineValue)
     cur.execute(f"insert into {fileName} (title) values (\"{lineValue}\");")
     con.commit()
     con.close()
@@ -68,7 +70,21 @@ def get_exist_sql_data():
                         "pageName is", jsonResults]}
 
 def save_page():
-    return True
+    data = request.form
+    database = str(data.get('database'))
+    datapage = str(data.get('datapage'))
+    keyWord = str(data.get('keyWord'))
+    draftWord = str(data.get('draftWord'))
+    summaryWord = str(data.get('summaryWord'))
+    unFileExtension = re.search(r'(\w+)\.db', database).group(1)
+    con = sqlite3.connect(database)
+    cur = con.cursor()
+    cur.execute(f"update {unFileExtension} set draft = ?,  keyWord = ?, summary = ?  where title = ?;",
+                (draftWord, keyWord, summaryWord, datapage))
+    con.commit()
+    con.close()
+    
+    return {'message': []}
 
 def delete_exist_sql_pageline():
     lineValue = str(request.args.get("inputPageValue"))
@@ -76,11 +92,24 @@ def delete_exist_sql_pageline():
     unFileExtension = re.search(r'(\w+)\.db', databasefile).group(1)
     con = sqlite3.connect(databasefile)
     cur = con.cursor()
-    print(databasefile)
-    print(unFileExtension)
-    print(lineValue)
     cur.execute(f"delete from {unFileExtension} where title = \"{lineValue}\";")
     con.commit()
     con.close()
 
     return {"message": ["delectSuccess", "CheckNextOne"]}
+
+def return_sql_page_data():
+    lineValue = str(request.args.get("pageValue"))
+    databasefile = str(request.args.get("databaseName"))
+
+    unFileExtension = re.search(r'(\w+)\.db', databasefile).group(1)
+    con = sqlite3.connect(databasefile)
+    cur = con.cursor()
+    print(unFileExtension)
+    cur.execute(f"select * from {unFileExtension} where title = \"{lineValue}\";")
+    result = cur.fetchall()
+    con.close()
+    returnMessage = ''
+    for row in result:
+        returnMessage = {"message": ["returnSuccess", "willLoadData"], "keyWord": [row[3]], "draftWord": [row[2]], "summary": [row[4]]}
+    return returnMessage
