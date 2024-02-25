@@ -1,0 +1,168 @@
+.leftButton, .rightButton {
+    padding: 5px 10px;
+    margin: 0 5px;
+    border: none;
+    background-color: #555;
+    color: #fff;
+    cursor: pointer;
+  }
+
+
+.rightButton {
+    /*margin-left: auto; /* 將右邊按鈕推到右邊 */
+    justify-content: flex-end;
+  }
+
+.statusBar {
+  background:  linear-gradient(#ff9900, #ffffff); /* 設定狀態欄背景顏色 */
+  color: #fff; /* 設定文字顏色 */
+  padding: 6px; /* 設定內邊距 */
+  display: flex;
+  align-items: center;
+  height: 5vh;
+}
+
+.fontSize24px {
+  font-size: 24px;
+
+}
+
+.topBar {
+  background:  linear-gradient(#f00404, #ff9900); /* 設定狀態欄背景顏色 */
+  color: #fff; /* 設定文字顏色 */
+  padding: 6px; /* 設定內邊距 */
+  display: flex;
+  align-items: center;
+  height: 5vh;
+}
+
+.paddingTop5px {
+  padding-top: 5px;
+}
+
+.sideBar {
+  background-color: #837e7ee0; /* 背景顏色 */
+  flex: 0 0 20%;
+  height: 70vh;
+}
+
+.keyWord {
+  background-color: #cfcfcfe0; /* 背景顏色 */
+  flex: 0 0 20%;
+}
+
+[isSelected=true] {
+  color: #c50101;
+  font-weight: bold;
+}
+
+[isSelected=false] {
+  color: #000;
+  font-weight: normal;
+}
+
+ul li p {
+  display:inline;
+}
+
+
+.draftWord {
+  background-color: #f8e9e9e0; /* 背景顏色 */
+  flex: 0 0 60%;
+}
+
+.draftWordInner {
+  width: 99%;
+  height: 83%;
+  box-sizing: border-box; /* 這一行對保證input的寬度是包含padding在內的 */
+  margin-left: 5px;
+}
+
+.footer {
+  background-color: #333; /* 背景顏色 */
+  color: #fff; /* 文字顏色 */
+  padding: 5px; /* 內邊距 */
+  margin-top: 10px; /* 摘要區與左側欄的上邊距 */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20vh;
+}
+
+.footerInner {
+  width: 99%;
+  height: 60%;
+  box-sizing: border-box; /* 這一行對保證input的寬度是包含padding在內的 */
+  margin-left: 5px;
+}
+
+.container {
+  display: flex;
+  border: 1px solid #000; /* 確保外層 div 可見 */
+  overflow: auto; /* 隱藏內容溢出 */
+  height: auto;
+}
+
+.autoHeight {
+  
+}
+
+.textArea {
+  resize: none; /* 防止用戶調整文本區域大小 */
+  overflow: auto; /* 如果文本太多，允許使用滾動條 */  
+}
+
+.willInvisibleLine {
+  color:#f00404;
+}
+
+.redValue {
+  color:#c50101;
+}
+
+.invisibleValue {
+}
+
+.pageLine {
+  margin-top: 20px;
+  height: 51vh;
+  overflow: auto; /* 當列表超出容器範圍時，產生滾動條 */
+}
+
+.selectColor {
+  display: inline-block;
+  font-size: 14px;
+  margin-top: 0px;
+  /* text-decoration: underline; */
+}
+
+.draftWordQuill {
+  background-color: white;
+  overflow: auto; /* 如果文本太多，允許使用滾動條 */  
+  height: 80%;
+  width: 99%;
+  overflow-x: scroll;
+
+}
+
+.summaryWordQuill {
+  background-color: white;
+  color: #000;
+  overflow: auto; /* 如果文本太多，允許使用滾動條 */  
+  height: 95%;
+  width: 79%;
+  overflow-x: scroll;
+}
+
+.summaryWordTitle {
+  margin-left: 15%;
+  vertical-align: top;
+  margin-right: 1%;
+}
+
+.statusBotton {
+  font-size: 16px;
+  text-decoration: underline;
+  height: 31px;
+}
