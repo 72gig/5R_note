@@ -54,19 +54,19 @@
 
 左上方可以建立用於輸入資料的資料庫，可視為筆記的主題命名
 
-![/images/Create_database.png]
+![image](https://github.com/72gig/5R_note/blob/main/images/Create_database.png)
 
 左側可以建立頁面，可視為筆記的標題
 
-![/images/Create_page.png]
+![image](https://github.com/72gig/5R_note/blob/main/images/Create_page.png)
 
 剩下欄位可用於記錄筆記內容，記得要輸入完以後需要保存筆記
 
-![/images/Note_test]
+![image](https://github.com/72gig/5R_note/blob/main/images/Note_test.png)
 
 關閉程式請按右邊的關閉程式按鈕，按下確定即完成關閉，直接關閉瀏覽器程式會在後台繼續執行
 
-![/images/Close_program.png]
+![image](https://github.com/72gig/5R_note/blob/main/images/Close_program.png)
 
 
 
