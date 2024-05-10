@@ -18,9 +18,9 @@
 
 `cd python-flask-server`
 
-再執行python程式
+再執行python的flask框架
 
-`python main.py`
+`flask run`
 
 ## 使用執行檔
 
